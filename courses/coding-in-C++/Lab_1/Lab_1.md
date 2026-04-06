@@ -115,7 +115,7 @@ Note: Write the answers for the questions in the code as comments.
 
 ## 🟡 Section III: Student Grade Report Formatter
 
-This exercise practices the following C++ concepts:
+You will practice the following concepts:
 
 * Call-by-reference (references)
 * `std::string`
@@ -143,7 +143,7 @@ void readStudentData(__ name,
 
 The function should:
 
-1. Ask the user for the **student name**
+1. Ask the user for the **student name** and read it using getline
 2. Ask for three scores:
 
    * Homework

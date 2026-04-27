@@ -120,18 +120,11 @@ You will implement a simple class hierarchy for geometric shapes.
 
 #### 🔹 Part 1 – Base Class
 
-Create a base class `Shape`:
+Create a base class that represents a general geometric shape.
 
-```cpp
-class Shape {
-public:
-    virtual double area() const;
-};
-```
-
-- Implement a default version returning `0`.
-
-⚠️ Test the function in `main`.
+- The class should define a method that computes the area
+- This method should just return a default value (0.0)
+- Think about whether this function should be declared as virtual and why
 
 ---
 

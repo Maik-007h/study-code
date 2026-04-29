@@ -33,9 +33,12 @@ public:
     BadAccount(int b) : Account(b) {}
     void withdraw(int amount)
     {
-        if (amount % 10 == 0)  // ❌ (1) stärkere Vorbedingung
-            balance -= amount; // ❌ (3) kann negativ werden
-                               // ❌ (2) keine Garantie mehr
+        if (amount % 10 != 0)
+        { // ❌ (1) stärkere Vorbedingung
+            return;
+        }
+        balance -= amount; // ❌ (3) kann negativ werden
+                           // ❌ (2) keine Garantie mehr
     }
 };
 
@@ -55,20 +58,23 @@ void process(Account &acc)
 
 int main()
 {
-    Account a(100);
-    BadAccount b(100);
+    Account account(100);
+    BadAccount bad(100);
 
     // Account *array[2];
-    // array[0] = &a;
-    // array[1] = &b;
+    // array[0] = &account;
+    // array[1] = &bad;
 
-    a.withdraw(200);
-    b.withdraw(200);
+    // array[0]->withdraw(200);
+    // array[1]->withdraw(200);
 
-    std::cout << a.getBalance() << '\n';
-    std::cout << b.getBalance() << '\n';
+    account.withdraw(200);
+    bad.withdraw(200);
 
-    // SafeAccount s(100);
-    // process(a); // 90
-    // process(s); // 90 → identisch
+    std::cout << account.getBalance() << '\n';
+    std::cout << bad.getBalance() << '\n';
+
+    // SafeAccount safe(100);
+    // process(account); // 90
+    // process(safe);    // 90 → identisch
 }

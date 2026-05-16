@@ -365,3 +365,133 @@ use_count()
 5. What does `use_count()` represent?
 6. Why can cyclic references become problematic with `std::shared_ptr`?
 7. Why should the base class destructor be virtual in polymorphic class hierarchies?
+
+## 🔴 Section IV: Bug Hunt & System Extension
+
+In this section you will analyze, debug and extend a larger C++ software system.
+
+You will practice the following concepts:
+
+* debugging and code analysis
+* logical and conceptual software errors
+* object-oriented design
+* STL containers
+* smart pointers
+* inheritance and polymorphism
+* software architecture improvements
+
+---
+
+## Task Description
+
+You are working on driver assistance systems for autonomous vehicles.
+
+The project already contains several components:
+
+* vehicles
+* distance sensors
+* emergency brake systems
+* adaptive cruise control
+* lane keeping assistants
+* parking assistants
+
+The current implementation compiles successfully, but contains several logical and conceptual problems.
+
+Your task is divided into multiple parts.
+
+---
+
+## 🟡 Part 1: Bug Hunt
+
+Analyze the existing source code and identify all logical or conceptual errors.
+Check the following files:
+- bugHunt_assistance_system.cpp
+- bugHunt_assistance_system.hpp
+- bugHunt_vehicle.cpp
+- bugHunt_vehicle.hpp
+- bugHunt_main.cpp
+
+---
+
+### Requirements
+
+1. Identify all 10 errors in the provided code.
+2. Explain why they are problematic.
+3. Correct the implementation.
+
+---
+
+### Testing
+
+After fixing the bugs:
+
+* emergency braking should trigger correctly
+* adaptive cruise control should slow down when necessary
+* steering corrections should behave correctly
+* invalid sensor values should be handled properly
+* parking assistant warnings should work as expected
+
+---
+
+## 🟡 Part 2: Smart Pointer Refactoring
+
+The current implementation uses raw pointers for sensor management.
+
+Refactor the project to use smart pointers instead.
+
+---
+
+### Requirements
+
+Replace raw pointers with:
+
+```cpp
+std::shared_ptr
+```
+
+The parking assistant should safely manage sensor ownership without using raw pointers.
+
+---
+
+### Additional Tasks
+
+1. Store sensors inside STL containers.
+2. Add the same front sensor to multiple systems in main.
+3. Print the reference counter in main to keep track of the number of owners.
+
+---
+
+## 🔴 Part 3: Polymorphic Assistance Systems
+
+Currently, all assistance systems are implemented independently.
+
+Introduce a common polymorphic base class:
+
+```cpp
+class AssistanceFeature
+```
+
+with the following public methods:
+- void evaluate(Vehicle &vehicle)
+- void print_name()
+- ~AssistanceFeature()
+
+Decide which of these methods should be virtual, pure virtual or normal functions.
+
+---
+
+### Requirements
+
+The following assistance systems should inherit from this class.
+
+* `EmergencyBrakeSystem`
+* `AdaptiveCruiseControl`
+* `LaneKeepingAssist`
+
+Store all assistance systems in a container:
+
+```cpp
+std::vector<std::unique_ptr<AssistanceFeature>>
+```
+
+Execute all systems polymorphically inside a loop in main.
